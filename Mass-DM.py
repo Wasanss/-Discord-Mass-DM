@@ -10,6 +10,8 @@ intents.members = True
 client = commands.Bot(command_prefix='!', intents=intents)
 client.remove_command('help')
 
+token = "여기 토큰"
+
 @client.event
 async def on_ready():
     print(f'{client.user}로 로그인 완료 ({client.user.id})')
@@ -40,3 +42,5 @@ async def dm(ctx, *, msg):
             fail += 1
     embed = discord.Embed(title='전체DM 결과', description=f':white_check_mark: 성공 : **{sent}** 회 \n:no_entry: 실패 : **{fail}** 회', colour=discord.Colour.blue())
     await ctx.send(embed=embed)
+    
+   client.run(token)
