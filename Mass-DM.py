@@ -1,5 +1,4 @@
 import discord
-from discord import member
 from discord.ext import commands
 from discord.ext.commands import has_permissions
 import datetime
@@ -15,7 +14,10 @@ client.remove_command('help')
 async def on_ready():
     print(f'{client.user}로 로그인 완료 ({client.user.id})')
     
+#!dm [보낼 메세지]
+    
 @client.command()
+@has_permissions(administrator=True) #관리자만 사용가능
 async def dm(ctx, *, msg):
     await ctx.send('서버 모두에게 DM을 전송합니다.')
     sent = 0
@@ -37,6 +39,4 @@ async def dm(ctx, *, msg):
             await ctx.send(f':no_entry: {user.mention}에게 DM 전송을 실패했습니다.')
             fail += 1
     embed = discord.Embed(title='전체DM 결과', description=f':white_check_mark: 성공 : **{sent}** 회 \n:no_entry: 실패 : **{fail}** 회', colour=discord.Colour.blue())
-    await ctx.send(embed=embed) 
-   
-   
+    await ctx.send(embed=embed)
